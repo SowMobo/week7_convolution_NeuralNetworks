@@ -9,6 +9,8 @@
 # OPTIONAL: Problem 2A) - Mini-batch GD
 ######################################################################
 
+import numpy as np
+import math as m
 from ast import Mod
 from turtle import forward
 from matplotlib.pyplot import axis, cla
@@ -49,9 +51,11 @@ class Linear(Module):
 ##################################################################
 # Activation module
 ##################################################################
-# Each activation module has a forward that takes in a batch of pre-activations Z and returns a batch of activations A.
+# Each activation module has a forward that takes in a batch of pre-activations Z 
+# and returns a batch of activations A.
 #
-# Each activation has a backward that takes in dLdA and returns dLdZ, with the exception of softmax, where we assume dLdZ passed in
+# Each activation has a backward that takes in dLdA and returns dLdZ, with the exception of softmax,
+# where we assume dLdZ passed in
 
 class Tanh(Module): # Layer activation
     def forward(self, Z):
@@ -227,4 +231,4 @@ def batch_norm_test():
     X,Y = super_simple_separable()
     nn.mini_gd(X,Y, iters = 1, lrate=0.005, K=2)
     return [np.vstack([nn.modules[3].B, nn.modules[3].G]).tolist(), \
-    np.vstack([nn.modules[3].mus_r, nn.modules[3].vars_r]).tolist(), nn.modules[3].norm.tolist()]
+    np.vstack([nn.modules[3].mus, nn.modules[3].vars]).tolist(), nn.modules[3].norm.tolist()]
